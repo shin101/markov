@@ -21,3 +21,28 @@ function readText(path){
 
 
 /** read URL and make text from it. */
+
+async function readURL(url){
+    try {
+        let resp = await axios.get(url);
+        let mm = new MarkovMachine(resp.data);
+        console.log(mm.makeText());
+    } catch(err){
+        console.log(err);
+        process.kill(1)
+    }
+};
+
+
+let method = process.argv[2];
+let path = process.argv[3];
+
+if (method==='file'){
+    readText(path);
+} else if(method==='url'){
+    readURL(path);
+}else{
+    console.log('error!');
+    process.kill(1);
+}
+

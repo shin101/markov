@@ -30,7 +30,7 @@ class MarkovMachine {
         chain[word].push(next_word);
       }else{
         // else add current word, next word??? 
-        chain[word].push(next_word)
+        chain[word].push(word)
       }
     }
     return chain;
