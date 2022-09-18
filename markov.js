@@ -20,20 +20,19 @@ class MarkovMachine {
     // TODO
     // create a new obect
     let chain = {};
-    // iterate over each word in word list
-    for(let i=0;i<this.words.length;i++){
-      // define current word and next word
-      let word = this.words[i];
-      let next_word = this.words[i+1]||null;
-      // if word exists in obj then push next word to chain
-      if(word in chain){
-        chain[word].push(next_word);
-      }else{
-        // else add current word, next word??? 
-        chain[word].push(word)
+    this.words.forEach(function (value, index, array) {
+      console.log(array)
+      if (index + 1 == array.length && chain[value]) {
+        chain[value].push(null);
+      } else if (index + 1 == array.length && !chain[value]) {
+        chain[value] = [null];
+      } else if (chain[value]) {
+        chain[value].push(array[index + 1]);
+      } else {
+        chain[value] = [array[index + 1]];
       }
-    }
-    return chain;
+    });
+    this.chain = chain;
   }
 
   /** Pick random choice from array */
